@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Table(name = "tbl_products")
+@Table(name = "tbl_products_postgres")
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Products implements Serializable {
 
@@ -33,7 +33,7 @@ public class Products implements Serializable {
 
     @ManyToMany
     @JoinTable(
-            name = "tbl_product_supplier",
+            name = "tbl_product_supplier_postgres",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "supplier_id"))
     @JsonManagedReference

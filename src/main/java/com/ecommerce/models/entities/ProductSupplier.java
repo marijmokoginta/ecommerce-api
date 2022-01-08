@@ -3,7 +3,7 @@ package com.ecommerce.models.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tbl_product_supplier")
+@Table(name = "tbl_product_supplier_postgres")
 public class ProductSupplier {
 
     @Id
