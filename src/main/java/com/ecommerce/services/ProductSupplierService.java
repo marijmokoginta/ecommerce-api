@@ -12,6 +12,6 @@ public class ProductSupplierService {
     private ProductSupplierRepository productSupplierRepository;
 
     public void deleteByProductIdAndSupplierId(long productId, long supplierId) {
-        productSupplierRepository.deleteByProductIdAndSupplierId(productId, supplierId);
+        productSupplierRepository.deleteOneRow(productId, supplierId);
     }
 }

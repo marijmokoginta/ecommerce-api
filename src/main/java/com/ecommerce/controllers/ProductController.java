@@ -108,8 +108,14 @@ public class ProductController {
         return productService.findProductsByNameLike(searchDTO.getSearchKey());
     }
 
-//    @GetMapping(value = "/show/{supplierId}")
-//    public List<Products> findProductBySupplierId(@PathVariable("supplierId") long supplierId) {
-//        return productService.findProductsBySupplierId(supplierId);
-//    }
+    @PostMapping(value = "/remove/{productId}")
+    public void removeSupplier(@RequestBody SupplierDTO supplierDTO, @PathVariable("productId") long productId) {
+        Supplier supplier = modelMapper.map(supplierDTO, Supplier.class);
+        productService.removeSupplier(supplier, productId);
+    }
+
+    @GetMapping(value = "/show/{supplierId}")
+    public List<Products> findProductBySupplierId(@PathVariable("supplierId") long supplierId) {
+        return productService.findProductsBySupplierId(supplierId);
+    }
 }

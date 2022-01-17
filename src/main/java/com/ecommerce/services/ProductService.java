@@ -3,6 +3,7 @@ package com.ecommerce.services;
 import com.ecommerce.models.entities.Products;
 import com.ecommerce.models.entities.Supplier;
 import com.ecommerce.models.repository.ProductRepository;
+import com.ecommerce.models.repository.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -17,8 +18,8 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-//    @Autowired
-//    private SupplierService supplierService;
+    @Autowired
+    private SupplierRepository supplierRepository;
 
     public Products save(Products product) {
         return productRepository.save(product);
@@ -26,10 +27,7 @@ public class ProductService {
 
     public Products findOne(long id) {
         Optional<Products> products = productRepository.findById(id);
-        if(!products.isPresent()) {
-            return null;
-        }
-        return products.get();
+        return products.orElse(null);
     }
 
     public Iterable<Products> findAll() {
@@ -47,9 +45,19 @@ public class ProductService {
     public void addSupplier(Supplier supplier, long productId){
         Products products = findOne(productId);
         if(products == null) {
-            throw new RuntimeException("Product with ID: "+productId+" no found");
+            throw new RuntimeException("Product with ID: "+productId+" not found");
         }
         products.getSuppliers().add(supplier);
+        save(products);
+    }
+
+    public void removeSupplier(Supplier supplier, long productId) {
+        Products products = findOne(productId);
+        if(products == null) {
+            throw new RuntimeException("Product with id: " + productId + "not found");
+        }
+        products.getSuppliers().remove(supplier);
+
         save(products);
     }
 
@@ -61,11 +69,8 @@ public class ProductService {
         return productRepository.findAllByOrderByIdDesc(pageable);
     }
 
-//    public List<Products> findProductsBySupplierId(long supplierId) {
-//        Supplier supplier = supplierService.findOne(supplierId);
-//        if(supplier == null) {
-//            return new ArrayList<Products>();
-//        }
-//        return productRepository.findProductsBySuppliersId(supplier);
-//    }
+    public List<Products> findProductsBySupplierId(long supplierId) {
+        Optional<Supplier> supplier = supplierRepository.findById(supplierId);
+        return productRepository.findProductsBySuppliersId(supplier);
+    }
 }
