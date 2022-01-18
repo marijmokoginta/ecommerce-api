@@ -75,23 +75,6 @@ public class ProductController {
         return productService.findOne(id);
     }
 
-    @PutMapping(value= "/update")
-    public ResponseEntity<ResponseData<Products>> update(@Valid @RequestBody Products products, Errors errors) {
-        ResponseData<Products> responseData = new ResponseData<>();
-
-        if(errors.hasErrors()) {
-            for(ObjectError error : errors.getAllErrors()) {
-                responseData.getMessages().add(error.getDefaultMessage());
-            }
-            responseData.setStatus(false);
-            responseData.setPayload(null);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
-        }
-        responseData.setStatus(true);
-        responseData.setPayload(productService.save(products));
-        return ResponseEntity.ok(responseData);
-    }
-
     @DeleteMapping(value= "/delete/{id}")
     public void removeOne(@PathVariable("id") long id){
         productService.removeOne(id);

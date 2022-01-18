@@ -14,7 +14,7 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String userId;
+//    private String userId;
 
     @Column(length = 150, nullable = false, unique = true)
     private String email;
@@ -25,11 +25,11 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    private Date lastLogin;
-    private Date lastLoginDisplay;
-    private Date joinDate;
-    private boolean isActive;
-    private boolean isNonLocked;
+//    private Date lastLogin;
+//    private Date lastLoginDisplay;
+//    private Date joinDate;
+//    private boolean isActive;
+//    private boolean isNonLocked;
 
 
     @Override
@@ -54,7 +54,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return isNonLocked;
+        return true;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return isActive;
+        return true;
     }
 
     public long getId() {
@@ -75,13 +75,13 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
+//    public String getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(String userId) {
+//        this.userId = userId;
+//    }
 
     public String getEmail() {
         return email;
@@ -103,43 +103,43 @@ public class User implements UserDetails {
         this.userRole = userRole;
     }
 
-    public Date getLastLogin() {
-        return lastLogin;
-    }
-
-    public void setLastLogin(Date lastLogin) {
-        this.lastLogin = lastLogin;
-    }
-
-    public Date getLastLoginDisplay() {
-        return lastLoginDisplay;
-    }
-
-    public void setLastLoginDisplay(Date lastLoginDisplay) {
-        this.lastLoginDisplay = lastLoginDisplay;
-    }
-
-    public Date getJoinDate() {
-        return joinDate;
-    }
-
-    public void setJoinDate(Date joinDate) {
-        this.joinDate = joinDate;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
-    public boolean isNonLocked() {
-        return isNonLocked;
-    }
-
-    public void setNonLocked(boolean nonLocked) {
-        isNonLocked = nonLocked;
-    }
+//    public Date getLastLogin() {
+//        return lastLogin;
+//    }
+//
+//    public void setLastLogin(Date lastLogin) {
+//        this.lastLogin = lastLogin;
+//    }
+//
+//    public Date getLastLoginDisplay() {
+//        return lastLoginDisplay;
+//    }
+//
+//    public void setLastLoginDisplay(Date lastLoginDisplay) {
+//        this.lastLoginDisplay = lastLoginDisplay;
+//    }
+//
+//    public Date getJoinDate() {
+//        return joinDate;
+//    }
+//
+//    public void setJoinDate(Date joinDate) {
+//        this.joinDate = joinDate;
+//    }
+//
+//    public boolean isActive() {
+//        return isActive;
+//    }
+//
+//    public void setActive(boolean active) {
+//        isActive = active;
+//    }
+//
+//    public boolean isNonLocked() {
+//        return isNonLocked;
+//    }
+//
+//    public void setNonLocked(boolean nonLocked) {
+//        isNonLocked = nonLocked;
+//    }
 }
