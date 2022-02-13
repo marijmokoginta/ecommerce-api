@@ -1,6 +1,5 @@
-package com.ecommerce.models.repository;
+package com.ecommerce.models.repositories;
 
-import com.ecommerce.dto.SupplierDTO;
 import com.ecommerce.models.entities.Products;
 import com.ecommerce.models.entities.Supplier;
 import org.springframework.data.jpa.repository.Query;

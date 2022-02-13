@@ -1,4 +1,4 @@
-package com.ecommerce.models.repository;
+package com.ecommerce.models.repositories;
 
 import com.ecommerce.models.entities.Products;
 import com.ecommerce.models.entities.Supplier;

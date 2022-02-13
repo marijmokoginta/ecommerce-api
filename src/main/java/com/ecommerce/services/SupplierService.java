@@ -1,9 +1,8 @@
 package com.ecommerce.services;
 
-import com.ecommerce.dto.SupplierDTO;
 import com.ecommerce.models.entities.Products;
 import com.ecommerce.models.entities.Supplier;
-import com.ecommerce.models.repository.SupplierRepository;
+import com.ecommerce.models.repositories.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

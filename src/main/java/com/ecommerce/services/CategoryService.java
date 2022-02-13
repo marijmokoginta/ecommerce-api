@@ -1,7 +1,7 @@
 package com.ecommerce.services;
 
 import com.ecommerce.models.entities.Category;
-import com.ecommerce.models.repository.CategoryRepository;
+import com.ecommerce.models.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
