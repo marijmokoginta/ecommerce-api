@@ -33,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/api/user/signin").permitAll();
         http.authorizeRequests().antMatchers("/api/user/register").permitAll();
         http.authorizeRequests().antMatchers("/api/user/existEmail").permitAll();
-        http.authorizeRequests().antMatchers(GET, "/api/product/**").hasAnyAuthority(ROLE_USER);
+        http.authorizeRequests().antMatchers(GET, "/api/product/**").hasAnyAuthority(ROLE_USER, ROLE_ADMIN);
         http.authorizeRequests().antMatchers(POST, "/api/product/**").hasAnyAuthority(ROLE_ADMIN);
         http.authorizeRequests().antMatchers("/api/supplier/**").hasAnyAuthority(ROLE_ADMIN);
         http.authorizeRequests().antMatchers("/api/category/**").hasAnyAuthority(ROLE_ADMIN);
