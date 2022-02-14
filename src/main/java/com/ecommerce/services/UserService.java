@@ -57,4 +57,8 @@ public class UserService implements UserDetailsService {
     private boolean confirmAccount() {
         return true;
     }
+
+    public Role save(Role role) {
+        return roleRepository.save(role);
+    }
 }
