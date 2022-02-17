@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-@RequestMapping("/suppliers")
+@RequestMapping("/api/supplier")
 public class SupplierController {
 
     @Autowired

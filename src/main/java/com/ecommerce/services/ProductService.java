@@ -2,13 +2,12 @@ package com.ecommerce.services;
 
 import com.ecommerce.models.entities.Products;
 import com.ecommerce.models.entities.Supplier;
-import com.ecommerce.models.repository.ProductRepository;
-import com.ecommerce.models.repository.SupplierRepository;
+import com.ecommerce.models.repositories.ProductRepository;
+import com.ecommerce.models.repositories.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

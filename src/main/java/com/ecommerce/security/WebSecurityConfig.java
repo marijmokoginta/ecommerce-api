@@ -1,36 +1,55 @@
 package com.ecommerce.security;
 
+import com.ecommerce.filter.CustomAuthorizationFilter;
 import com.ecommerce.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import static com.ecommerce.constant.SecurityConstant.ROLE_ADMIN;
+import static com.ecommerce.constant.SecurityConstant.ROLE_USER;
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserService userService;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .authorizeRequests().antMatchers("/user/registrasi").permitAll()
-                .anyRequest().fullyAuthenticated()
-                .and().httpBasic();
+        http.cors().and().csrf().disable();
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.authorizeRequests().antMatchers("/api/user/signin").permitAll();
+        http.authorizeRequests().antMatchers("/api/user/register").permitAll();
+        http.authorizeRequests().antMatchers("/api/user/existEmail").permitAll();
+        http.authorizeRequests().antMatchers(GET, "/api/product/**").hasAnyAuthority(ROLE_USER, ROLE_ADMIN);
+        http.authorizeRequests().antMatchers(POST, "/api/product/**").hasAnyAuthority(ROLE_ADMIN);
+        http.authorizeRequests().antMatchers("/api/supplier/**").hasAnyAuthority(ROLE_ADMIN);
+        http.authorizeRequests().antMatchers("/api/category/**").hasAnyAuthority(ROLE_ADMIN);
+        http.authorizeRequests().anyRequest().authenticated();
+        http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(daoAuthenticationProvider());
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     @Bean
